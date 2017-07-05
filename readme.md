@@ -335,11 +335,73 @@ The `sort` method is another higher order function which gets a test funtion but
 
 The test function for `sort` is called with two arguments `a` and `b` which represent any two elements being sorted.
 
-### Callbacks (5 minutes / 2:15)
+### Looking Forward: Callbacks (5 minutes / 2:15)
+
+While array traversal methods are a very common example of higher order functions, an even more common time that we want to pass functions as arguments to other functions is called a callback.
+
+These are ideas we'll cover in depth in a couple of classes but consider the following at a high level as a primer.
+
+Callbacks passed to another function to be called at some later time.
+
+All the examples that we have looked at use the function being passed as an argument immediately (and repeatedly).
+
+Callbacks are generally called at some time in the future.
+What types of things might we want to trigger a function call on?
 
 ### Returning Functions from Functions
 
+We can also build functions with other functions.
+
+```js
+function multiplyBy (num) {
+  return (anotherNum) => num * anotherNum
+}
+
+const multiplyBy2 = multiplyBy(2)
+const multiplyBy5 = multiplyBy(5)
+
+console.log(multiplyBy2(4))
+console.log(multiplyBy5(4))
+```
+
 #### Closures (5 minutes / 2:20)
+
+Notice that even though `num` in not defined within the function being returned, it is still remembered by the function through what is called the function's **closure**.
+
+We can right some really neat code taking advantage of **closures**.
+
+```js
+function Locker(password){
+  let locked = true
+  let content
+
+  return {
+    toggle (pwd) {
+      if (pwd === password){
+        locked = !locked
+      }
+      return locked
+    },
+    read () {
+      if (locked) {
+        return "unlock to read"
+      } else {
+        return content
+      }
+    },
+    write (newContent) {
+      if (locked) {
+        return "unlock to write"
+      } else {
+        content = newContent
+        return conent
+      }
+    }
+  }
+}
+```
+
+Eloquent JavaScript has a really great [explanation of closures](http://eloquentjavascript.net/03_functions.html#h_hOd+yVxaku).
 
 ### Review and Questions (10 minutes / 2:30)
 
