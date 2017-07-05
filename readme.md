@@ -6,7 +6,7 @@
 - Use higher order functions to iterate over a list
 - Describe the uses of `forEach`, `map`, `filter`, and `reduce`
 - Define `every` and `some`
-- Explain how a custom sort function can be defined
+- Describe a closure
 
 ## Review
 
@@ -15,9 +15,26 @@
 - Functions are defined with zero or more **paramaters**
   - **Parameters** are special variables available in the body of the function with values assigned by the code calling the function.
   - The values provided by the calling code are called the **arguments** to the function.
+
+```js
+function sum (a, b) { // function "sum" defined with parameters a and b
+  return a + b
+}
+
+sum(3, 4) // function "sum" called with arguments a and b
+// => 7
+```
+
 - Functions always return a value
   - Either explicitly using a **return** statement
   - Or, implicitly returning `undefined`
+
+```js
+// in a repl
+console.log('hello!')
+// 'hello!'
+// => undefined
+```
 
 ### Functions are regular values (5 minutes / 00:15)
 - Functions are values just like numbers, strings, booleans, arrays, objects, `undefined`, and `null`.
@@ -149,7 +166,7 @@ forEach(wdiInstructors, printInstructorGreeting)
 ```
 
 This is such a common process that JavaScript has `forEach` (and a bunch of other helpful higher lever functions) built into arrays.
-We call them with **dot notation** because they are methods, an idea we'll dive into further this afternoon.
+We call them with **dot notation** because they are methods (functions attached to an object), an idea we'll dive into further this afternoon.
 
 ```js
 wdiInstructors.forEach(printInstructorGreeting)
@@ -161,7 +178,7 @@ Which is `printInstructorGreeting`?
 
 Frequently, rather than do something for each piece of data, we want to transform each piece of data.
 
-`forEach` has a closely related sibling `map` that instead of calling a helper function for its effect, it calls a helper function for its return value and creates a new array of the return values.
+`forEach` has a closely related sibling `map` that instead of calling a passed function for its effect, it calls a passed function for its return value and creates a new array of the return values.
 
 Let's write a loop to create an array called `instructorNames` that will be an array of 6 strings, the instructor names.
 
@@ -251,21 +268,30 @@ function filter (array, fn) {
 }
 ```
 
+And we can use the function:
+
+```js
+const wdi17one = filter(wdiInstructors, teaches17)
+```
+
 Like the others, `filter` is available directly on arrays:
 
 ```js
-const wdi17one = wdiInstructors.filter(teaches17)
+const wdi17two = wdiInstructors.filter(teaches17)
 
 // or with an anonymous function
 
-const wdi17two = wdiInstructors.filter(instructor => instructor.cohor === 17)
+const wdi17three = wdiInstructors.filter(instructor => instructor.cohort === 17)
 ```
 
-#### Practice (10 minutes)
+#### Practice (10 minutes / 1:05)
+(7 minutes working / 3 minutes discussing)
 
-Open [repl.it] and declare a variable `states`.
-Assign to it the array of objects from `capitals.json`.
-Using the array traversal methods we were just looking at, create the following values (keep track of your answers)
+Use either your `script.js` file you've been working in or open [repl.it](https://repl.it/languages/javascript).
+
+- Declare a variable `states`.
+- Assign to it the array of objects from `capitals.json`.
+- Using the array traversal methods we were just looking at, create the following values (keep track of your answers)
 
 1. Create an array of strings for each capital with the city and state name (e.g. `'Austin, Texas'`)
 2. Filter all the states with capitals that start with a consonant.
@@ -273,9 +299,9 @@ Using the array traversal methods we were just looking at, create the following 
 4. How many capitals are north of Annapolis?
 
 
-## Break (10 minutes / 01:05)
+## Break (10 minutes / 01:15)
 
-#### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 01:20)
+#### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 01:30)
 
 The most generic list comprehension function is called `reduce`.
 Both map and filter build up an arrays as they go through the list.
@@ -323,9 +349,9 @@ It is definitely not something you need to have mastered it is just good to have
 
 For a step by step of how the mechanics work, check out [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works)
 
-#### Exercise: Defining Some and Every (40 minutes / 02:00)
+#### Exercise: Defining Some and Every (30 minutes / 02:00)
 
-(30 minutes small groups / 10 minutes class discussion)
+(20 minutes small groups / 10 minutes class discussion)
 
 - There are two related methods, `some` and `every` that each take a test function (like filter) and applies it to each element of an array.
 - `some` will return true if the test function returns true given **any** of the items in the array and false otherwise.
@@ -365,6 +391,8 @@ function compareNumbers(a,b) {
 // with an anonymous function
 [1, 2, 10, 20, 3, -1, 12].sort((a, b) => a - b)
 ```
+
+How would we write a compare function to sort our capitals from most northern to most southern?
 
 ### Looking Forward: Callbacks (5 minutes / 2:15)
 
