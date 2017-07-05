@@ -257,6 +257,18 @@ const wdi17one = wdiInstructors.filter(teaches17)
 const wdi17two = wdiInstructors.filter(instructor => instructor.cohor === 17)
 ```
 
+#### Practice (10 minutes)
+
+Open [repl.it] and declare a variable `states`.
+Assign to it the array of objects from `capitals.json`.
+Using the array traversal methods we were just looking at, create the following values (keep track of your answers)
+
+1. Create an array of strings for each capital with the city and state name (e.g. `'Austin, Texas'`)
+2. Filter all the states with capitals that start with a consonant.
+3. List all the sates with two words in their name.
+4. How many capitals are north of Annapolis?
+
+
 ## Break (10 minutes / 01:05)
 
 #### [Reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (15 minutes / 01:20)
@@ -330,3 +342,12 @@ The test function for `sort` is called with two arguments `a` and `b` which repr
 #### Closures (5 minutes / 2:20)
 
 ### Review and Questions (10 minutes / 2:30)
+
+- Check out the [Coding Meetup Kata's](http://www.codewars.com/kata/coding-meetup-number-1-higher-order-functions-series-count-the-number-of-javascript-developers-coming-from-europe) for lots more practice
+- [Node School Workshoppers](https://nodeschool.io/#workshoppers)
+- [Eloquent JS Higher Order Functions](http://eloquentjavascript.net/05_higher_order.html)
+
+#### Review
+- What is the difference between output and a side effect?
+- What is the difference between an argument and a parameter?
+- What is the difference between referencing and invoking a function?
