@@ -40,6 +40,10 @@ Functions that can take as arguments or return as output, other functions are ca
 
 ### Passing Functions to Functions (5 minutes / 00:25)
 
+Create a directory called `js-higher-order-functions` in your sandbox directory.
+Inside of it create an `index.html` file and a `script.js` file.
+Add boiler plate to `index.html`, link the script, and add a `console.log` to the script to make sure everything is wired up properly.
+
 Higher order functions make it possible for us to pass custom behavior to functions that do generic tasks.
 There is an especially common task of looping through an array that we very commonly use higher order functions.
 
@@ -334,6 +338,33 @@ For a step by step of how the mechanics work, check out [this section on the MDN
 The `sort` method is another higher order function which gets a test funtion but the sort test is slightly more complicated.
 
 The test function for `sort` is called with two arguments `a` and `b` which represent any two elements being sorted.
+
+Rather than returning `true` or `false` as in the case of the other test functions we've looked at, the compare function should:
+- return a negative number if `a` should come before `b`
+- return 0 if `a` and `b` are equal
+- return a positive number if `a` should come after `b`
+
+By default, `sort` uses a compare function that converts `a` and `b` to strings and sorts based on **unicode** values (alphabatized but with all uppercase characters before all lower case characters).
+
+This leads to the odd behavior of `10` being sorted infront of `2`.
+
+```js
+[1, 2, 10, 20, 3, -1, 12].sort()
+// => [-1, 1, 10, 12, 2, 20, 3]
+```
+
+To write a compare function that works as expected:
+
+```js
+function compareNumbers(a,b) {
+  return a - b
+}
+
+[1, 2, 10, 20, 3, -1, 12].sort(compareNumbers)
+// => [-1, 1, 2, 3, 10, 12, 20]
+// with an anonymous function
+[1, 2, 10, 20, 3, -1, 12].sort((a, b) => a - b)
+```
 
 ### Looking Forward: Callbacks (5 minutes / 2:15)
 
