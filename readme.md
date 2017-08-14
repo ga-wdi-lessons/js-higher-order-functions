@@ -2,8 +2,8 @@
 
 ## Learning Objectives
 
-- Describe what a higher order function is
-- Use higher order functions to iterate over a list
+- Define a higher order function (in terms of what input/output these functions can take)
+- Use higher order functions to iterate over lists
 - Describe the uses of `forEach`, `map`, `filter`, and `reduce`
 - Define `every` and `some`
 - Describe a closure
@@ -12,7 +12,7 @@
 
 ### What is a function? (10 minutes / 00:10)
 - Defined chunk of code that can be called by later code
-- Functions are defined with zero or more **paramaters**
+- Functions are defined with zero or more **parameters**
   - **Parameters** are special variables available in the body of the function with values assigned by the code calling the function.
   - The values provided by the calling code are called the **arguments** to the function.
 
@@ -53,18 +53,18 @@ We use collections, most commonly Objects and Arrays to build up data to describ
 
 ## Higher Order Functions
 
-Functions that can take as arguments or return as output, other functions are called **higer order functions**.
+Functions that can take as arguments or return as output, other functions are called **higher order functions**.
 
 ### Passing Functions to Functions (5 minutes / 00:25)
 
 Create a directory called `js-higher-order-functions` in your sandbox directory.
 Inside of it create an `index.html` file and a `script.js` file.
-Add boiler plate to `index.html`, link the script, and add a `console.log` to the script to make sure everything is wired up properly.
+Add boilerplate to `index.html`, link the script, and add a `console.log` to the script to make sure everything is wired up properly.
 
 Higher order functions make it possible for us to pass custom behavior to functions that do generic tasks.
 There is an especially common task of looping through an array that we very commonly use higher order functions.
 
-We'll use the following array for the next few examples:
+We'll use the following array for the next few examples...
 
 ```js
 const wdiInstructors = [
@@ -91,34 +91,34 @@ const wdiInstructors = [
   },
   {
     name: {
-      first: 'Adrian',
-      last: 'Maseda'
+      first: 'Ali',
+      last: 'Spittel'
     },
-    cohort: 16
+    cohort: 18
   },
   {
     name: {
-      first: 'Nayana',
-      last: 'Davis'
+      first: 'Eric',
+      last: 'Green'
     },
-    cohort: 16
+    cohort: 18
   },
   {
     name: {
       first: 'James',
       last: 'Reichard'
     },
-    cohort: 16
+    cohort: 18
   }
 ]
 ```
-#### For Each (10 minutes / 00:35)
+#### forEach (10 minutes / 00:35)
 
 Very frequently, we will want to go through an array and do something for every element in the array.
 
 As an example, we'll loop through the above array printing the line `'<Instructor name> is an instructor for WDI<cohort number>'` for each instructor.
 
-In languages without higher order functions, we would need to use a loop to preform this task (and we can do so in JS):
+In languages without higher order functions, we would need to use a loop to preform this task (and we can do so in JS)...
 
 ```js
 for (let i = 0; i < wdiInstructors.length; i++) {
@@ -130,7 +130,7 @@ for (let i = 0; i < wdiInstructors.length; i++) {
 }
 ```
 
-We can write a function that encapsulates the action taken on each instructor object:
+We can write a function that encapsulates the action taken on each instructor object...
 
 ```js
 function printInstructorGreeting (instructor){
@@ -141,7 +141,7 @@ function printInstructorGreeting (instructor){
 }
 ```
 
-And rewrite the loop to use this function:
+And rewrite the loop to use this function...
 
 ```js
 for (let i = 0; i < wdiInstructors.length; i++) {
@@ -149,7 +149,7 @@ for (let i = 0; i < wdiInstructors.length; i++) {
 }
 ```
 
-We can go even further and write a `forEach` function that takes care of the loop boilerplate for us as well:
+We can go even further and write a `forEach` function that takes care of the loop boilerplate for us as well...
 
 ```js
 function forEach (array, fn){
@@ -159,7 +159,7 @@ function forEach (array, fn){
 }
 ```
 
-We can now write our original loop in one line using our helper methods:
+We can now write our original loop in one line using our helper methods...
 
 ```js
 forEach(wdiInstructors, printInstructorGreeting)
@@ -172,17 +172,19 @@ We call them with **dot notation** because they are methods (functions attached 
 wdiInstructors.forEach(printInstructorGreeting)
 ```
 
-#### Map (10 minutes / 00:45)
-We discussed functions that were called for their **side effect** versus functions that are called for their **return value** when we introduce functions.
-Which is `printInstructorGreeting`?
+#### map (10 minutes / 00:45)
 
-Frequently, rather than do something for each piece of data, we want to transform each piece of data.
+We discussed functions that were called for their **side effect** versus functions that are called for their **return value** or **output** when we introduce functions.
+
+Does `printInstructorGreeting` have any output? What about side-effects?
+
+Frequently, rather than do **something for each** piece of data, we want to do **something to each** piece of data, applying some transformation to the items in the array.
 
 `forEach` has a closely related sibling `map` that instead of calling a passed function for its effect, it calls a passed function for its return value and creates a new array of the return values.
 
 Let's write a loop to create an array called `instructorNames` that will be an array of 6 strings, the instructor names.
 
-First we'll write a function that takes an individual instructor object and returns the name string.
+First, we'll write a function that takes an individual instructor object and returns the name string.
 
 ```js
 function getFullName (instructor){
@@ -199,7 +201,7 @@ for (let i = 0; i > wdiInstructors.length; i++) {
 }
 ```
 
-We can write a function that takes care of this looping and array building boiler plate:
+We can write a function that takes care of this looping and array building boilerplate...
 
 ```js
 function map (array, fn) {
@@ -211,13 +213,13 @@ function map (array, fn) {
 }
 ```
 
-We can now use our map function to write:
+We can now use our map function to write...
 
 ```js
 const instructorNames2 = map(wdiInstructors, getFullName)
 ```
 
-Like `forEach`, `map` is also a built in method available on arrays:
+Like `forEach`, `map` is also a built-in method available on arrays...
 
 ```js
 const instructorNames3 = wdiInstructors.map(getFullName)
@@ -233,9 +235,9 @@ const instructorNames4 = wdiInstructors.map(instructor => {
 
 Another common procedure is to filter elements from an array based on some custom condition.
 
-The condition is a function that will return `true` or `false` when given an element from the collection.
+The condition will take the form of a function that will return `true` or `false` when given an element from the collection.
 
-First we'll write the filter function (the custom condition):
+First we'll write the filter function (the custom condition)...
 
 ```js
 function teaches17(instructor) {
@@ -243,7 +245,7 @@ function teaches17(instructor) {
 }
 ```
 
-We can write a loop that uses this function:
+We can write a loop that uses this function...
 
 ```js
 const wdi17 = []
@@ -254,7 +256,7 @@ for (let i = 0;  i > wdiInstructors.length; i++) {
 }
 ```
 
-A function that takes care of the looping and condition checking would look like:
+A function that takes care of the looping and condition checking would look like...
 
 ```js
 function filter (array, fn) {
@@ -268,13 +270,13 @@ function filter (array, fn) {
 }
 ```
 
-And we can use the function:
+And we can use the function...
 
 ```js
 const wdi17one = filter(wdiInstructors, teaches17)
 ```
 
-Like the others, `filter` is available directly on arrays:
+Like the others, `filter` is available directly on arrays...
 
 ```js
 const wdi17two = wdiInstructors.filter(teaches17)
@@ -307,7 +309,7 @@ The most generic list comprehension function is called `reduce`.
 Both map and filter build up an arrays as they go through the list.
 Reduce gives you custom control of the value you build as you go through the list.
 
-Mapping with reduce:
+Mapping with reduce...
 
 ```js
 const instructorNames5 = wdiInstructors.reduce((names, instructor) => {
@@ -315,13 +317,13 @@ const instructorNames5 = wdiInstructors.reduce((names, instructor) => {
 }, [])
 ```
 
-Taking the sum of an array of numbers:
+Taking the sum of an array of numbers...
 
 ```js
 const total = [1, 3, 5, 7].reduce((sum, num) => sum + num, 0)
 ```
 
-Filtering even numbers:
+Filtering even numbers...
 
 ```js
 const odds = [1, 2, 3, 4, 5, 6, 7].reduce((odds, num) => {
@@ -332,7 +334,7 @@ const odds = [1, 2, 3, 4, 5, 6, 7].reduce((odds, num) => {
 }, [])
 ```
 
-Or count even numbers:
+Or count even numbers...
 
 ```js
 const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
@@ -343,9 +345,7 @@ const numEvens = [1, 2, 3, 4, 5, 6, 7].reduce((count, num) => {
 }, 0)
 ```
 
-Reduce can be hard to grasp at first.
-Don't stress about this.
-It is definitely not something you need to have mastered it is just good to have an awareness.
+Reduce can be hard to grasp at first; don't stress about this. It is definitely not something you need to have mastered, it is just good to have an awareness. It takes some practice to use `.reduce` intuitively when solving problems.
 
 For a step by step of how the mechanics work, check out [this section on the MDN page for reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce#How_reduce_works)
 
@@ -356,40 +356,43 @@ For a step by step of how the mechanics work, check out [this section on the MDN
 - There are two related methods, `some` and `every` that each take a test function (like filter) and applies it to each element of an array.
 - `some` will return true if the test function returns true given **any** of the items in the array and false otherwise.
 - `every` will return true if the test function returns true for **every** one of the items in the array and false otherwise.
-- Working with a partner at your table define funtions `some` and `every` that take an array and a function and work as described.
+- Working with a partner at your table define functions `some` and `every` that take an array and a function and work as described.
 
 
 #### Sort (10 minutes / 2:10)
 
-The `sort` method is another higher order function which gets a test funtion but the sort test is slightly more complicated.
+The `sort` method is another higher order function which gets a test function but the sort test is slightly more complicated.
 
 The test function for `sort` is called with two arguments `a` and `b` which represent any two elements being sorted.
 
-Rather than returning `true` or `false` as in the case of the other test functions we've looked at, the compare function should:
+Rather than returning `true` or `false` as in the case of the other test functions we've looked at, the compare function should...
 - return a negative number if `a` should come before `b`
 - return 0 if `a` and `b` are equal
 - return a positive number if `a` should come after `b`
 
-By default, `sort` uses a compare function that converts `a` and `b` to strings and sorts based on **unicode** values (alphabatized but with all uppercase characters before all lower case characters).
+By default, `sort` uses a compare function that converts `a` and `b` to strings and sorts based on **unicode** values (alphabetized but with all uppercase characters before all lower case characters).
 
-This leads to the odd behavior of `10` being sorted infront of `2`.
+This leads to the odd behavior of `10` being sorted in front of `2`.
 
 ```js
 [1, 2, 10, 20, 3, -1, 12].sort()
 // => [-1, 1, 10, 12, 2, 20, 3]
 ```
 
-To write a compare function that works as expected:
+To write a compare function that works as expected...
 
 ```js
 function compareNumbers(a,b) {
   return a - b
 }
 
+// with a named function
 [1, 2, 10, 20, 3, -1, 12].sort(compareNumbers)
 // => [-1, 1, 2, 3, 10, 12, 20]
+
 // with an anonymous function
 [1, 2, 10, 20, 3, -1, 12].sort((a, b) => a - b)
+// => [-1, 1, 2, 3, 10, 12, 20]
 ```
 
 How would we write a compare function to sort our capitals from most northern to most southern?
@@ -453,7 +456,7 @@ function Locker(password){
         return "unlock to write"
       } else {
         content = newContent
-        return conent
+        return content
       }
     }
   }
